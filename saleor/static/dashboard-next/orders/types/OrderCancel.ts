@@ -15,13 +15,13 @@ export interface OrderCancel_orderCancel_order_billingAddress_country {
 
 export interface OrderCancel_orderCancel_order_billingAddress {
   __typename: "Address";
-  id: string;
   city: string;
   cityArea: string;
   companyName: string;
   country: OrderCancel_orderCancel_order_billingAddress_country;
   countryArea: string;
   firstName: string;
+  id: string;
   lastName: string;
   phone: string | null;
   postalCode: string;
@@ -47,17 +47,40 @@ export interface OrderCancel_orderCancel_order_events {
   user: OrderCancel_orderCancel_order_events_user | null;
 }
 
+export interface OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine_unitPrice_gross {
+  __typename: "Money";
+  amount: number;
+  currency: string;
+}
+
+export interface OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine_unitPrice_net {
+  __typename: "Money";
+  amount: number;
+  currency: string;
+}
+
+export interface OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine_unitPrice {
+  __typename: "TaxedMoney";
+  gross: OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine_unitPrice_gross;
+  net: OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine_unitPrice_net;
+}
+
 export interface OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine {
   __typename: "OrderLine";
   id: string;
   productName: string;
+  productSku: string;
+  quantity: number;
+  quantityFulfilled: number;
+  unitPrice: OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine_unitPrice | null;
+  thumbnailUrl: string | null;
 }
 
 export interface OrderCancel_orderCancel_order_fulfillments_lines_edges_node {
   __typename: "FulfillmentLine";
   id: string;
-  orderLine: OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine;
   quantity: number;
+  orderLine: OrderCancel_orderCancel_order_fulfillments_lines_edges_node_orderLine;
 }
 
 export interface OrderCancel_orderCancel_order_fulfillments_lines_edges {
@@ -74,47 +97,38 @@ export interface OrderCancel_orderCancel_order_fulfillments {
   __typename: "Fulfillment";
   id: string;
   lines: OrderCancel_orderCancel_order_fulfillments_lines | null;
+  fulfillmentOrder: number;
   status: FulfillmentStatus;
   trackingNumber: string;
 }
 
-export interface OrderCancel_orderCancel_order_lines_edges_node_unitPrice_gross {
+export interface OrderCancel_orderCancel_order_lines_unitPrice_gross {
   __typename: "Money";
   amount: number;
   currency: string;
 }
 
-export interface OrderCancel_orderCancel_order_lines_edges_node_unitPrice_net {
+export interface OrderCancel_orderCancel_order_lines_unitPrice_net {
   __typename: "Money";
   amount: number;
   currency: string;
 }
 
-export interface OrderCancel_orderCancel_order_lines_edges_node_unitPrice {
+export interface OrderCancel_orderCancel_order_lines_unitPrice {
   __typename: "TaxedMoney";
-  gross: OrderCancel_orderCancel_order_lines_edges_node_unitPrice_gross;
-  net: OrderCancel_orderCancel_order_lines_edges_node_unitPrice_net;
+  gross: OrderCancel_orderCancel_order_lines_unitPrice_gross;
+  net: OrderCancel_orderCancel_order_lines_unitPrice_net;
 }
 
-export interface OrderCancel_orderCancel_order_lines_edges_node {
+export interface OrderCancel_orderCancel_order_lines {
   __typename: "OrderLine";
   id: string;
   productName: string;
   productSku: string;
   quantity: number;
   quantityFulfilled: number;
-  unitPrice: OrderCancel_orderCancel_order_lines_edges_node_unitPrice | null;
+  unitPrice: OrderCancel_orderCancel_order_lines_unitPrice | null;
   thumbnailUrl: string | null;
-}
-
-export interface OrderCancel_orderCancel_order_lines_edges {
-  __typename: "OrderLineCountableEdge";
-  node: OrderCancel_orderCancel_order_lines_edges_node;
-}
-
-export interface OrderCancel_orderCancel_order_lines {
-  __typename: "OrderLineCountableConnection";
-  edges: OrderCancel_orderCancel_order_lines_edges[];
 }
 
 export interface OrderCancel_orderCancel_order_shippingAddress_country {
@@ -125,13 +139,13 @@ export interface OrderCancel_orderCancel_order_shippingAddress_country {
 
 export interface OrderCancel_orderCancel_order_shippingAddress {
   __typename: "Address";
-  id: string;
   city: string;
   cityArea: string;
   companyName: string;
   country: OrderCancel_orderCancel_order_shippingAddress_country;
   countryArea: string;
   firstName: string;
+  id: string;
   lastName: string;
   phone: string | null;
   postalCode: string;
@@ -202,10 +216,17 @@ export interface OrderCancel_orderCancel_order_user {
   email: string;
 }
 
+export interface OrderCancel_orderCancel_order_availableShippingMethods_price {
+  __typename: "Money";
+  amount: number;
+  currency: string;
+}
+
 export interface OrderCancel_orderCancel_order_availableShippingMethods {
   __typename: "ShippingMethod";
   id: string;
   name: string;
+  price: OrderCancel_orderCancel_order_availableShippingMethods_price | null;
 }
 
 export interface OrderCancel_orderCancel_order {
@@ -215,7 +236,7 @@ export interface OrderCancel_orderCancel_order {
   created: any;
   events: (OrderCancel_orderCancel_order_events | null)[] | null;
   fulfillments: (OrderCancel_orderCancel_order_fulfillments | null)[];
-  lines: OrderCancel_orderCancel_order_lines | null;
+  lines: (OrderCancel_orderCancel_order_lines | null)[];
   number: string | null;
   paymentStatus: PaymentStatusEnum | null;
   shippingAddress: OrderCancel_orderCancel_order_shippingAddress | null;
@@ -228,6 +249,7 @@ export interface OrderCancel_orderCancel_order {
   totalAuthorized: OrderCancel_orderCancel_order_totalAuthorized | null;
   totalCaptured: OrderCancel_orderCancel_order_totalCaptured | null;
   user: OrderCancel_orderCancel_order_user | null;
+  userEmail: string | null;
   availableShippingMethods: (OrderCancel_orderCancel_order_availableShippingMethods | null)[] | null;
 }
 
