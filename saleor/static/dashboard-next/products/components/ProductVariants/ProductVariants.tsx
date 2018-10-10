@@ -56,13 +56,7 @@ const decorate = withStyles(theme => {
 });
 
 export const ProductVariants = decorate<ProductVariantsProps>(
-  ({
-    classes,
-    variants,
-    fallbackPrice,
-    onRowClick,
-    onVariantAdd
-  }) => (
+  ({ classes, variants, fallbackPrice, onRowClick, onVariantAdd }) => (
     <Card>
       <CardTitle
         title={i18n.t("Variants")}
