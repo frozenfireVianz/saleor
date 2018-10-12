@@ -188,10 +188,16 @@ const CategoryDetails: React.StatelessComponent<CategoryDetailsProps> = ({
                         onAddCategory={() =>
                           navigate(categoryAddUrl(encodeURIComponent(id)))
                         }
-                        onAddProduct={() =>
-                          navigate(encodeURIComponent(productAddUrl))
+                        onAddProduct={() => navigate(productAddUrl)}
+                        onBack={() =>
+                          navigate(
+                            categoryShowUrl(
+                              data && data.category && data.category.parent
+                                ? data.category.parent.id
+                                : undefined
+                            )
+                          )
                         }
-                        onBack={() => window.history.back()}
                         onCategoryClick={id => () =>
                           navigate(categoryShowUrl(encodeURIComponent(id)))}
                         onDelete={deleteCategory}
