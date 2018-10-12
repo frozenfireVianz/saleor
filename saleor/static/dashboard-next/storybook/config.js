@@ -38,11 +38,13 @@ function loadStories() {
 
   // Categories
   require("./stories/categories/CategoryDeleteDialog");
+  require("./stories/categories/CategoryDelete");
   require("./stories/categories/CategoryDetailsPage");
   require("./stories/categories/CategoryEditPage");
   require("./stories/categories/CategoryProducts");
   require("./stories/categories/CategoryCreatePage");
   require("./stories/categories/CategoryUpdatePage");
+  require("./stories/categories/CategoryTable");
 
   // Collections
   require("./stories/collections/CollectionDetailsPage");
