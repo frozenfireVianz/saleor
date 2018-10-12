@@ -22,7 +22,11 @@ export const CategoryCreateForm: React.StatelessComponent<
           const handleSuccess = (data: CategoryCreate) => {
             if (data.categoryCreate.errors.length === 0) {
               pushMessage({ text: i18n.t("Category created") });
-              navigate(categoryShowUrl(data.categoryCreate.category.id));
+              navigate(
+                categoryShowUrl(
+                  encodeURIComponent(data.categoryCreate.category.id)
+                )
+              );
             }
           };
           return (
@@ -36,7 +40,9 @@ export const CategoryCreateForm: React.StatelessComponent<
                     ? createResult.categoryCreate.errors
                     : [];
                 return (
-                  <NavigatorLink to={categoryShowUrl(parentId)}>
+                  <NavigatorLink
+                    to={categoryShowUrl(encodeURIComponent(parentId))}
+                  >
                     {handleCancel => (
                       <CategoryEditPage
                         category={{ description: "", name: "" }}

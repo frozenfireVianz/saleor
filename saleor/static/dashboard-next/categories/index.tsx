@@ -12,20 +12,25 @@ const CategoryPaginator: React.StatelessComponent<RouteComponentProps<any>> = ({
 }) => {
   const qs = parseQs(location.search.substr(1));
   const params = {
-    after: qs.after,
-    before: qs.before
+    after: decodeURIComponent(qs.after),
+    before: decodeURIComponent(qs.before)
   };
-  return <CategoryDetails id={match.params.id} params={params} />;
+  return (
+    <CategoryDetails
+      id={match.params.id ? decodeURIComponent(match.params.id) : undefined}
+      params={params}
+    />
+  );
 };
 const SubcategoryCreateForm: React.StatelessComponent<
   RouteComponentProps<any>
 > = ({ match }) => {
-  return <CategoryCreateForm parentId={match.params.id} />;
+  return <CategoryCreateForm parentId={decodeURIComponent(match.params.id)} />;
 };
 const SubcategoryUpdateForm: React.StatelessComponent<
   RouteComponentProps<any>
 > = ({ match }) => {
-  return <CategoryUpdateForm id={match.params.id} />;
+  return <CategoryUpdateForm id={decodeURIComponent(match.params.id)} />;
 };
 
 const Component = ({ match }) => (

@@ -50,7 +50,9 @@ const CategoryDeleteProvider: React.StatelessComponent<
       if (called && !loading) {
         return (
           <Redirect
-            to={categoryShowUrl(category.parent ? category.parent.id : null)}
+            to={categoryShowUrl(
+              category.parent ? encodeURIComponent(category.parent.id) : null
+            )}
             push={false}
           />
         );
@@ -183,14 +185,21 @@ const CategoryDetails: React.StatelessComponent<CategoryDetailsProps> = ({
                             : undefined
                         }
                         loading={loading}
-                        onAddCategory={() => navigate(categoryAddUrl(id))}
-                        onAddProduct={() => navigate(productAddUrl)}
+                        onAddCategory={() =>
+                          navigate(categoryAddUrl(encodeURIComponent(id)))
+                        }
+                        onAddProduct={() =>
+                          navigate(encodeURIComponent(productAddUrl))
+                        }
                         onBack={() => window.history.back()}
                         onCategoryClick={id => () =>
-                          navigate(categoryShowUrl(id))}
+                          navigate(categoryShowUrl(encodeURIComponent(id)))}
                         onDelete={deleteCategory}
-                        onEdit={() => navigate(categoryEditUrl(id))}
-                        onProductClick={id => () => navigate(productUrl(id))}
+                        onEdit={() =>
+                          navigate(categoryEditUrl(encodeURIComponent(id)))
+                        }
+                        onProductClick={id => () =>
+                          navigate(productUrl(encodeURIComponent(id)))}
                         pageInfo={pageInfo}
                         onNextPage={loadNextPage}
                         onPreviousPage={loadPreviousPage}
