@@ -559,5 +559,4 @@ PAYMENT_PROVIDERS = {
             'private_key': os.environ.get('BRAINTREE_PRIVATE_KEY')
         }
     }
-
 }
